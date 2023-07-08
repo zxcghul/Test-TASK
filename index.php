@@ -19,15 +19,15 @@
     include 'function.php';
     $link = mysqli_connect('localhost', 'root', '', 'user_info');
     $con = new Connect(
-        'user_info', 
-        ['first_name', 'last_name', 'email', 'company_name', 'position', 'number', 'number_home', 'number_work'], 
-        ['first_name', 'last_name', 'email', 'company_name', 'position', 'number', 'number_home', 'number_work'],
-        $_POST["add"],
-        $_GET['red'],
-        $_POST['del']
+        'user_info', // название таблицы в БД
+        ['first_name', 'last_name', 'email', 'company_name', 'position', 'number', 'number_home', 'number_work'], //Поля которые будут обновлятся при запросе на обновление
+        ['first_name', 'last_name', 'email', 'company_name', 'position', 'number', 'number_home', 'number_work'], //Поля которые будут добавляться при запросе на добавление
+        $_POST["add"], //запрос на добавление
+        $_GET['red'], //запрос на редактирование
+        $_POST['del'] //запрос на удаление
     );
-    $con->checkAdd($link);
-    $product = $con->selectInput($link);
+    $con->checkAdd($link); //Добавление, редактирование, удаление полей из БД
+    $product = $con->selectInput($link); //подстановка в поля input-a при запросе на редактирование
     ?>
     
     <form class="form" action="" method="post">
@@ -70,12 +70,12 @@
     </form>
     <div class="conclusion">
     <?
-    $con->showPage($link, $_GET['page']);
+    $con->showPage($link, $_GET['page']); //вывод карточек пользователей
     ?>
     </div>
     <div class="pagination">
     <?
-    $con->showPagination($link, $_GET['page']);
+    $con->showPagination($link, $_GET['page']); //вывод пагинации
     ?>
     </div>
     <script src="./inputmask.min.js"></script>
